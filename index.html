@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Loading...</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#111;
+    color:white;
+    font-family:Arial, sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:95%;
+    max-width:800px;
+    text-align:center;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+.video-wrapper{
+    width:100%;
+    aspect-ratio:16/9;
+    margin-bottom:25px;
+}
+
+.video-wrapper iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    border-radius:12px;
+}
+
+#continueBtn{
+    display:none;
+    padding:14px 34px;
+    font-size:18px;
+    font-weight:bold;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#28a745;
+    color:white;
+}
+
+#continueBtn:hover{
+    background:#218838;
+}
+
+#timerText{
+    margin-top:15px;
+    color:#ccc;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Please Wait...</h1>
+
+    <div class="video-wrapper" id="videoContainer"></div>
+
+    <button id="continueBtn">
+        Continue
+    </button>
+
+    <div id="timerText">
+        Continue available in
+        <span id="timer">5</span>
+        seconds
+    </div>
+
+</div>
+
+<script>
+
+// Put your YouTube video IDs here
+const videos = [
+    "JDjTQNOvyTg",
+    "RbimXGH5zkE",
+    "N6g0iTGl1YY"
+];
+
+// Final destination
+const destinationURL =
+    "https://sugarcanetest.my.canva.site/wifi-password";
+
+// Random video selection
+const randomVideo =
+    videos[Math.floor(Math.random() * videos.length)];
+
+// Load YouTube video
+document.getElementById("videoContainer").innerHTML =
+`
+<iframe
+src="https://www.youtube.com/embed/${randomVideo}?autoplay=1&mute=1&rel=0"
+allow="autoplay; encrypted-media"
+allowfullscreen>
+</iframe>
+`;
+
+// Countdown
+let seconds = 5;
+
+const countdown = setInterval(() => {
+
+    seconds--;
+
+    document.getElementById("timer").innerText =
+        seconds;
+
+    if(seconds <= 0){
+
+        clearInterval(countdown);
+
+        document.getElementById("timerText").style.display =
+            "none";
+
+        document.getElementById("continueBtn").style.display =
+            "inline-block";
+    }
+
+}, 1000);
+
+// Button redirect
+document.getElementById("continueBtn")
+.addEventListener("click", function(){
+
+    window.location.href = destinationURL;
+
+});
+</script>
+
+</body>
+</html>
